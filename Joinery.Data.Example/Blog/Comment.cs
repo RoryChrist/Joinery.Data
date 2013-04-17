@@ -36,6 +36,14 @@ namespace Joinery.Data.Example.Blog
                 .ExecuteAll();
         }
 
+        public static Grouped<Comment> SelectAllGroupedByPost()
+        {
+            return Database
+                .Select<Comment>()
+                .OrderBy(comment => comment.CreatedAt, descending: true)
+                .ExecuteAllGroupedBy(comment => comment.PostId);
+        }
+
         // ---------------------------------------------------------------------------------------------
         // Public Properties
         // ---------------------------------------------------------------------------------------------

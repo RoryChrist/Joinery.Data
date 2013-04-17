@@ -77,7 +77,7 @@ namespace Joinery.Data
             return groups.ContainsKey(groupId);
         }
 
-        public T[] FindAll(int groupId)
+        public T[] SelectAll(int groupId)
         {
             List<T> group;
 
@@ -91,7 +91,7 @@ namespace Joinery.Data
             }
         }
 
-        public T FindFirst(int groupId)
+        public T SelectFirst(int groupId)
         {
             List<T> group;
 
@@ -105,7 +105,7 @@ namespace Joinery.Data
             }
         }
 
-        public T FindOne(int groupId)
+        public T SelectOne(int groupId)
         {
             List<T> group;
 
@@ -119,7 +119,7 @@ namespace Joinery.Data
             }
         }
 
-        public bool TryFindOne(int groupId, out T item)
+        public bool TrySelectOne(int groupId, out T item)
         {
             List<T> group;
 

@@ -1,8 +1,6 @@
 # Joinery.Data
 
-Joinery.Data is a lightweight data access library for .NET and SQL Server.
-
-The library features:
+Joinery.Data is a lightweight data access library for .NET and SQL Server, featuring:
 
 - LINQ expression support for basic SELECT, INSERT, UPDATE and DELETE statements
 - SQL support for complex queries
@@ -43,6 +41,34 @@ Select a page of records:
             .Where(post => post.Posted == true)
             .OrderBy(post => post.PostedAt, descending: true)
             .ExecuteAllPaged(page, pageSize);
+    }
+
+Select parent-child records:
+
+    public static Post[] SelectAll()
+    {
+        return Database
+            .Select<Post>()
+            .OrderBy(post => post.PostedAt, descending: true)
+            .ExecuteAll();
+    }
+
+    public static Grouped<Comment> SelectAllGroupedByPost()
+    {
+        return Database
+            .Select<Comment>()
+            .OrderBy(comment => comment.CreatedAt, descending: true)
+            .ExecuteAllGroupedBy(comment => comment.PostId);
+    }
+
+    var posts = Post.SelectAll();
+    var comments = Comment.SelectAllGroupedByPost();
+
+    foreach (var post in posts)
+    {
+        foreach (var comment in comments.SelectAll(post.PostId))
+        {
+        }
     }
 
 ## Modifying Data

@@ -23,6 +23,14 @@ namespace Joinery.Data.Example.Blog
             Database.Save(post);
         }
 
+        public static Post[] SelectAll()
+        {
+            return Database
+                .Select<Post>()
+                .OrderBy(post => post.PostedAt, descending: true)
+                .ExecuteAll();
+        }
+
         public static Post SelectOne(int postId)
         {
             return Database
